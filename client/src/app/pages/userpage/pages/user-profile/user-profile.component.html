@@ -1,0 +1,31 @@
+<div class="container-wrapper">
+  <div class="profile-credentials">
+    <img [src]=" user?.profilePicture || 'assets/images/avatar.png'" alt="" class="avatar-image" [matMenuTriggerFor]="menuAvatarImage"/>
+
+    <div class="profile-wrapper">
+      <div class="user-profile">
+        <h2 class="user-name">{{ user?.firstName }} {{ user?.lastName }}</h2>
+        <button mat-raised-button class="edit-account-button black-button">Edit profile</button>
+      </div>
+
+      <div class="activity-section">
+        <p class="activity"><span class="strong-text">{{ user?.followers?.length }}</span> followers</p>
+        <p class="activity"><span class="strong-text">{{ user?.follow_ups?.length }}</span> follow ups</p>
+        <p class="activity"><span class="strong-text">{{ user?.posts?.length }}</span> posts</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="container" *ngIf="userPosts.length > 0; else elseBlock">
+    <div class="posts-wrapper"></div>
+  </div>
+
+  <ng-template #elseBlock>
+    <p>You have no post yet</p>
+  </ng-template>
+
+  <mat-menu #menuAvatarImage="matMenu" xPosition="before">
+    <button mat-menu-item>Edit image</button>
+    <input type="file" class="input-file" (change)="onChangeImage($event.target)"/>
+  </mat-menu>
+</div>

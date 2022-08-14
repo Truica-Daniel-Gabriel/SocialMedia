@@ -1,0 +1,23 @@
+<div class="form-wrapper">
+  <h1 class="form-title">Login</h1>
+  <form [formGroup]="profileForm" (ngSubmit)="onLogin()" class="form-style">
+    <mat-form-field appearance="fill" class="field-style">
+      <mat-label>Email</mat-label>
+      <input type="email" name="email" matInput formControlName="email" />
+
+      <mat-error *ngIf="profileForm.controls['email'].hasError('required')">Email required</mat-error>
+      <mat-error *ngIf="profileForm.controls['email'].hasError('email')">Invalid email</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="field-style">
+      <mat-label>Password</mat-label>
+      <input type="password" name="password" autocomplete="on" matInput formControlName="password" />
+
+      <mat-error *ngIf="profileForm.controls['password'].hasError('required')">Password required</mat-error>
+    </mat-form-field>
+
+    <button mat-raised-button class="black-button">Login</button>
+  </form>
+  <p class="info-text">Do you have no account ? <a routerLink="../register">Sign up</a></p>
+</div>
+

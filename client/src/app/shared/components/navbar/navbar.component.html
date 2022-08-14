@@ -1,0 +1,27 @@
+<nav class="container">
+  <div class="container-wrapper">
+    <h1 class="logo" routerLink="/home">SocialUI</h1>
+
+    <div class="menu-container">
+      <mat-icon matSuffix fontSet="material-icons-outlined" class="nav-icon" [matMenuTriggerFor]="menuNotifications"
+        >notifications</mat-icon
+      >
+      <mat-icon matSuffix fontSet="material-icons-outlined" class="nav-icon">chat</mat-icon>
+      <mat-icon matSuffix fontSet="material-icons-outlined" class="nav-icon" (click)="openDialog()" >add_box</mat-icon>
+      <mat-icon matSuffix fontSet="material-icons-outlined" class="nav-icon" [matMenuTriggerFor]="menuProfile"
+        >account_circle</mat-icon
+      >
+    </div>
+
+    <mat-menu #menuProfile="matMenu" xPosition="after">
+      <button mat-menu-item routerLink="/userpage/profile/1">Account profile</button>
+      <button mat-menu-item>Story</button>
+      <button mat-menu-item (click)="OnLogout()">Log out</button>
+    </mat-menu>
+
+    <mat-menu #menuNotifications="matMenu" xPosition="before">
+      <button mat-menu-item>Item 1</button>
+      <button mat-menu-item>Item 2</button>
+    </mat-menu>
+  </div>
+</nav>

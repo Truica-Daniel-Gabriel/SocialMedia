@@ -1,0 +1,8 @@
+<div class="container">
+  <div *ngIf="posts.length > 0; else elseBlock" class="cards-wrapper">
+    <app-post-card *ngFor="let post of posts"  [post]="post"></app-post-card>
+  </div>
+  <ng-template #elseBlock>
+    <p>Have no users for you</p>
+  </ng-template>
+</div>

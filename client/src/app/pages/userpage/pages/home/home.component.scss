@@ -1,0 +1,13 @@
+.container {
+   min-height: calc(100vh - 80px);
+   width: 70%;
+   background-color: burlywood;
+   margin: 0 auto;
+   padding: 40px 230px 0;
+   .cards-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    padding-bottom: 200px;
+   }
+}

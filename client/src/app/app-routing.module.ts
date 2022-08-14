@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AuthenticatedGuard } from './@core/guards/authenticated.guard';
 
 const routes: Routes = [
   {
@@ -21,6 +22,7 @@ const routes: Routes = [
 
   {
     path: 'userpage',
+    canLoad:[AuthenticatedGuard],
     loadChildren: () =>
       import('./pages/userpage/userpage.module').then((m) => m.UserpageModule),
   },

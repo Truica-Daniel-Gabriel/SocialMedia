@@ -1,0 +1,69 @@
+.container {
+  display: flex;
+  height: 700px;
+  flex-direction: column;
+  border: 4px solid gray;
+  border-radius: 15px 15px 0 0;
+  background-color: aliceblue;
+  overflow: hidden;
+
+  .user-profile {
+    display: flex;
+    margin: 5px 10px;
+
+    .user-details {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      margin-left: 5px;
+      padding: 5px 0;
+
+      .user-account {
+        font-size: 17px;
+        font-weight: 500;
+        margin: 0;
+      }
+
+      .user-location {
+        margin: 0;
+      }
+    }
+
+    .image-account {
+      width: 60px;
+      height: 60px;
+      object-fit: cover;
+      border: 7px solid rgb(148, 61, 151);
+      border-radius: 50%;
+    }
+  }
+
+  .image-card {
+    width: 100%;
+    height: 80%;
+    object-fit: cover;
+  }
+
+  .menu {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 64px;
+    width: 100%;
+    padding: 0 20px;
+
+    .rating-icons {
+      display: flex;
+      gap: 20px;
+    }
+  }
+
+  .icons {
+    font-size: 30px;
+    width: 30px;
+    height: 30px;
+    color: rgb(132, 132, 132);
+    opacity: 0.5;
+    cursor: pointer;
+  }
+}

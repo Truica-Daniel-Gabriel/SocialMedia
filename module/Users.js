@@ -2,11 +2,25 @@ const mongoose = require("mongoose");
 const { Schema } = mongoose;
 
 const userSchema = new Schema({
-  name: {
+  firstName: {
     type: String,
     minlength: 3,
     maxlength: 15,
     required: true,
+  },
+  lastName: {
+    type: String,
+    minlength: 3,
+    maxlength: 15,
+    required: true,
+  },
+  birthday: {
+    type: Date,
+    required: true,
+  },
+  city: {
+    type: String,
+    default: null,
   },
   profilePicture: {
     type: String,
@@ -23,10 +37,19 @@ const userSchema = new Schema({
     require: true,
     unique: true,
   },
-  friends: {
+  followers: {
     type: Array,
     default: [],
   },
+  follow_ups: {
+    type: Array,
+    default: [],
+  },
+  posts: {
+    type: Array,
+    default: [],
+  },
+
   isAdmin: {
     type: Boolean,
     default: false,
