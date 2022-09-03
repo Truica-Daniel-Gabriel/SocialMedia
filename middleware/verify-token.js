@@ -18,6 +18,7 @@ const verifyAdmin = (req, res, next) => {
   !token && res.status(400).json("access denied");
   try {
     const verifiedUser = jwt.verify(token, jwtSecret);
+
     !verifiedUser.isAdmin && res.status(400).json("access denied");
     req.user = verifiedUser;
     next();

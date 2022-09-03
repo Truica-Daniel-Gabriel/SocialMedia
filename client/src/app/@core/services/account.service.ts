@@ -1,3 +1,4 @@
+import { HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject, Observable, tap } from 'rxjs';
@@ -9,6 +10,9 @@ import {
   Account,
   ResponseAccountRegister,
   ResponseAccountUpdate,
+  ResponseGetUser,
+  ResponseGetAllUsers,
+  ResponseGetOtherUser,
 } from '../models/account';
 import { SessionStorageService } from './session-storage.service';
 
@@ -28,7 +32,6 @@ export class AccountSerivce {
   public login(account: RequestAccountLogin): Observable<ResponseAccountLogin> {
     return this.http.post('/auth/login', account).pipe(
       tap(({ account, jwtToken }) => {
-        console.log('aci', account, jwtToken);
         this.sessionService.set({ key: 'account', value: JSON.stringify(account) });
         this.sessionService.set({ key: 'jwtToken', value: jwtToken });
 
@@ -60,12 +63,54 @@ export class AccountSerivce {
   }
 
   public editAccountImage(image: string | null | ArrayBuffer): Observable<ResponseAccountUpdate> {
-    return this.http.patch(`/user/editAccountImage/${this.account$.value?.id}`, {profilePicture:image}).pipe(
+    return this.http.patch(`/user/editAccountImage/${this.account$.value?._id}`, { profilePicture: image }).pipe(
       tap(({ account }) => {
         this.account$.next(account);
-        this.sessionService.set({key:'account', value: JSON.stringify(account)});
+        this.sessionService.set({ key: 'account', value: JSON.stringify(account) });
       })
     );
+  }
+  public setFollow(friendId: string | null): Observable<any> | void {
+    if (friendId) {
+      let queryParams = new HttpParams();
+      queryParams = queryParams.append('userId', this.account$.value!._id);
+      queryParams = queryParams.append('friendId', friendId);
+      return this.http.patch(`/user/follow`, null, {
+        params: queryParams,
+      }).pipe(
+        tap(()=>{
+          this.getUserAccount(this.account$.value?._id)?.subscribe()
+        })
+      );
+    }
+  }
+
+  public getUserAccount(id: string | null | undefined): Observable<ResponseGetOtherUser> | void {
+
+    if(id){
+      return this.http.get(`/user/getUser/${id}`).pipe(
+        tap(({user})=>{
+          if(this.account$.value?._id === user._id){
+            this.account$.next(user);
+            this.sessionService.set({ key: 'account', value: JSON.stringify(user) });
+          }
+        })
+      );
+    }
+  }
+
+  public getSpecificUsers(users:any):Observable<any> {
+    return this.http.post("/user/getSepcificUsers", {users})
+  }
+
+  public getAllUsers(): Observable<ResponseGetAllUsers> | void {
+    if(this.account$.value?._id){
+      return this.http.get(`/user/getAllUsers/${this.account$.value?._id}`);
+    }
+  }
+
+  public getAccountPostInformation(id: string): Observable<ResponseGetUser> {
+    return this.http.get(`/user/profilePost/${id}`);
   }
 
   public get getAccount(): BehaviorSubject<Account | null> {

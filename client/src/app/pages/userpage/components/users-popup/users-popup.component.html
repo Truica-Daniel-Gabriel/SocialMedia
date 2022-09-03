@@ -1,0 +1,6 @@
+<div class="container">
+  <section class="users-wrapper" *ngFor="let user of users" >
+      <img [src]="user.profilePicture || 'assets/images/avatar.png'" alt="" class="img-wrapper">
+      <p class="user-name">{{user.firstName}} {{user.lastName}}</p>
+  </section>
+</div>

@@ -10,8 +10,5 @@ import { AccountSerivce } from 'src/app/@core/services/account.service';
 export class AuthComponent {
 
   constructor(private readonly http: AccountSerivce) { }
-  public onLogin():void {
-    console.log('hello')
-  }
 
 }

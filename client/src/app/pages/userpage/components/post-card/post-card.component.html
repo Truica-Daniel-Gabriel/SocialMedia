@@ -1,0 +1,25 @@
+<div class="container">
+  <div class="user-profile">
+    <img [src]="AccountInfo?.profilePicture || 'assets/images/avatar.png'" alt="" class="image-account" />
+
+    <div class="user-details">
+      <p class="user-account">{{ AccountInfo?.firstName  }}</p>
+      <p class="user-location">{{ post.location }}</p>
+    </div>
+  </div>
+
+  <img [src]="post.imageUrl" alt="" class="image-card" />
+  <p [ngClass]="smallDescription ? 'post-description small-description': 'post-description'" (click)="onDescriptionSize()">{{post.description}}</p>
+  <div class="menu">
+    <div class="rating-icons">
+      <span>
+        <mat-icon matSuffix [ngClass]="likePost ? 'like-icon': 'icons'" (click)="onSetLike()" >favorite_plus</mat-icon>
+        {{post.likes.length}}
+      </span>
+
+      <mat-icon matSuffix class="icons" (click)="onOpenModal()" >maps_ugc</mat-icon>
+    </div>
+
+    <mat-icon matSuffix class="icons">bookmark</mat-icon>
+  </div>
+</div>

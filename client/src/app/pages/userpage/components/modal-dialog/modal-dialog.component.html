@@ -1,11 +1,39 @@
 <div class="container">
-  <h1 mat-dialog-title>Create a new post</h1>
-  <div mat-dialog-content class="dialog-content">
-    <mat-icon matSuffix fontSet="material-icons-outlined" class="gallery-photo">photo_library</mat-icon>
-    <p class="gallery-text">Drag photos here</p>
-    <button mat-raised-button class="black-button file-button">
-      Select image
-      <input type="file" class="input-file" />
-    </button>
+  <h1 mat-dialog-title>{{section===1 ? "Add the image" : "Add post credentials"}}</h1>
+  <button class="next-modal-button" (click)="onNextModal()" [disabled]="!previewImage">Continue</button>
+
+  <div mat-dialog-content class="dialog-content-image" *ngIf="section === 1">
+    <img [src]="previewImage" alt="" class="previewImage" *ngIf="previewImage" />
+    <div class="dialog-items">
+      <mat-icon matSuffix fontSet="material-icons-outlined" class="gallery-photo">photo_library</mat-icon>
+      <p class="gallery-text">Drag photos here</p>
+      <button mat-raised-button class="black-button file-button">
+        Select image
+        <input type="file" class="input-file" (change)="onChangeImage($event.target)" />
+      </button>
+    </div>
   </div>
+
+  <form
+    [formGroup]="postCredentials"
+    (ngSubmit)="onSendPost()"
+    mat-dialog-content
+    class="dialog-content-form"
+    *ngIf="section === 2"
+  >
+    <mat-form-field appearance="fill" class="field-style">
+      <mat-label>Location</mat-label>
+      <input type="text" matInput formControlName="location" minlength="3"/>
+
+      <mat-error *ngIf="postCredentials.controls['location'].hasError('required')">Location required</mat-error>
+      <mat-error *ngIf="postCredentials.controls['location'].hasError('minlength')">Minimum 3 characters</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="field-style">
+      <mat-label>Description</mat-label>
+      <textarea type="text" autocomplete="on" matInput formControlName="description" cols="10" rows="10" class="description-area"></textarea>
+    </mat-form-field>
+
+    <button mat-raised-button class="black-button form-button">Send</button>
+  </form>
 </div>

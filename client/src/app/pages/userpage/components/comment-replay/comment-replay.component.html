@@ -1,0 +1,9 @@
+<div class="message-wrapper" *ngIf="commentUser">
+  <section class="message-container">
+    <img [src]="commentUser.profilePicture || 'assets/images/avatar.png'" alt="" class="avatar-user" />
+    <p [ngClass]="ellipsisText ? 'commentElement ellipsisText' : 'commentElement'" (click)="setEllipsisText()">
+      <span class="tag-person">{{replay.commentReplay.tag}}</span>
+      <span class="userName"> {{ commentUser.firstName }} {{ commentUser.lastName }}</span> {{ replay.message }}
+    </p>
+  </section>
+</div>

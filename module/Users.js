@@ -45,11 +45,6 @@ const userSchema = new Schema({
     type: Array,
     default: [],
   },
-  posts: {
-    type: Array,
-    default: [],
-  },
-
   isAdmin: {
     type: Boolean,
     default: false,

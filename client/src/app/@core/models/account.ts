@@ -1,5 +1,5 @@
 export interface Account {
-  id:string;
+  _id: string;
   firstName: string;
   lastName: string;
   email: string;
@@ -37,6 +37,27 @@ export interface ResponseAccountRegister {
 }
 
 export interface ResponseAccountUpdate {
+  message: string;
+  account: Account;
+}
+
+export interface User {
+  _id: string;
+  profilePicture: string;
+  firstName: string;
+  lastName: string;
+}
+export interface ResponseGetUser {
+  message: string;
+  user: User;
+}
+
+export interface ResponseGetAllUsers {
+  users: User[];
+  message: string;
+}
+
+export interface ResponseGetOtherUser {
+  user:Account;
   message:string;
-  account:Account;
 }

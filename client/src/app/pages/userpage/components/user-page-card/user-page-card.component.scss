@@ -1,0 +1,52 @@
+.account-cards {
+  width: fit-content;
+  height: 400px;
+  position: relative;
+  img {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.account-cards::before {
+  content: url("/assets/images/favourite.png") attr(data-setLikes);
+  display: flex;
+  transform: scale(.7);
+  justify-content: center;
+  margin-right: 80px;
+  align-items: center;
+  position: absolute;
+  color: #ffff;
+  font-size: 32px;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  opacity: 0;
+  transition: 0.3s ease-out;
+}
+.account-cards:hover::before{
+  opacity: 1;
+}
+
+.account-cards::after {
+  content: url("/assets/images/comment.png") attr(data-setComments);
+  display: flex;
+  transform: scale(.7);
+  justify-content: center;
+  margin-left: 80px;
+  align-items: center;
+  position: absolute;
+  color: #ffff;
+  font-size: 32px;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  opacity: 0;
+  transition: 0.3s ease-out;
+}
+.account-cards:hover::after{
+  opacity: 1;
+}

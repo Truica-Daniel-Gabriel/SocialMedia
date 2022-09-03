@@ -1,33 +1,45 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { EditAccountComponent } from './pages/edit-account/edit-account.component';
 import { HomeComponent } from './pages/home/home.component';
 import { UserProfileComponent } from './pages/user-profile/user-profile.component';
 import { UserpageComponent } from './userpage.component';
 
 const routes: Routes = [
   {
-    path:'',
+    path: '',
+    redirectTo: 'home',
+    pathMatch: 'full',
+  },
+  {
+    path: 'home',
     component: UserpageComponent,
     children: [
       {
         path: '',
-        redirectTo:'home',
-        pathMatch:'full'
+        component: HomeComponent,
+      },
+    ],
+  },
+
+  {
+    path: 'profile/:id',
+    component: UserpageComponent,
+    children: [
+      {
+        path: '',
+        component: UserProfileComponent,
       },
       {
-        path:'home',
-        component:HomeComponent
+        path: 'editAccount',
+        component: EditAccountComponent,
       },
-      {
-        path:'profile/:id',
-        component:UserProfileComponent
-      }
-    ]
-  }
+    ],
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class UserpageRoutingModule { }
+export class UserpageRoutingModule {}

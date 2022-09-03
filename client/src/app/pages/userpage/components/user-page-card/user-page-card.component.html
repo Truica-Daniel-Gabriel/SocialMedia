@@ -1,0 +1,8 @@
+<div
+  class="account-cards"
+  [attr.data-setLikes]="post.likes.length"
+  [attr.data-setComments]="comments.length"
+  (click)="openPostModal()"
+>
+  <img [src]="post.imageUrl" />
+</div>

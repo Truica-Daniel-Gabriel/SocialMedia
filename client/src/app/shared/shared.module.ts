@@ -12,9 +12,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { NavbarComponent } from './components/navbar/navbar.component';
-import { PostCardComponent } from './components/post-card/post-card.component';
-import {MatDialogModule} from '@angular/material/dialog';
+import { MatDialogModule } from '@angular/material/dialog';
 import { RouterModule } from '@angular/router';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 
 const MODULES = [
   CommonModule,
@@ -29,17 +29,14 @@ const MODULES = [
   MatFormFieldModule,
   MatDatepickerModule,
   MatNativeDateModule,
-  MatDialogModule
+  MatDialogModule,
 ];
 
-const DECLARATIONS = [
-  NavbarComponent,
-  PostCardComponent
-]
+const DECLARATIONS = [NavbarComponent];
 
 @NgModule({
-  declarations:[DECLARATIONS],
-  imports: [MODULES, RouterModule],
+  declarations: [DECLARATIONS],
+  imports: [MODULES, RouterModule, MatAutocompleteModule],
   providers: [MatDatepickerModule],
   exports: [MODULES, DECLARATIONS],
 })

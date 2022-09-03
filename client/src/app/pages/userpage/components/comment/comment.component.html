@@ -1,0 +1,24 @@
+<div class="message-wrapper" *ngIf="userDetails">
+  <section class="message-container">
+    <img [src]="userDetails.profilePicture || 'assets/images/avatar.png'" alt="" class="avatar-user" />
+    <p [ngClass]="ellipsisText ? 'commentElement ellipsisText' : 'commentElement'" (click)="setEllipsisText()">
+      <span class="userName"> {{ userDetails.firstName }} {{ userDetails.lastName }}</span> {{ comment.message }}
+    </p>
+  </section>
+
+  <section class="replay-section">
+    <div class="comment-menu">
+      <p class="buttons-menu" (click)="onSendReplay()">Replay</p>
+      <p *ngIf="!showReplay" class="buttons-menu" (click)="onShowAndHideReplays()">Show more</p>
+      <p *ngIf="showReplay" class="buttons-menu" (click)="onShowAndHideReplays()">Show less</p>
+    </div>
+
+    <div *ngIf="showReplay && (comment.replays.length > 0); else noReplays" class="replays-wrapper">
+      <app-comment-replay *ngFor="let replay of comment.replays" [replay]="replay"></app-comment-replay>
+    </div>
+
+    <ng-template #noReplays >
+      <p *ngIf="showReplay" class="noReplays">This have no replays</p>
+    </ng-template>
+  </section>
+</div>

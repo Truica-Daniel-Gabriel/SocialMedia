@@ -1,0 +1,67 @@
+.message-wrapper {
+  display: flex;
+  flex-direction: column;
+
+  .message-container {
+    display: flex;
+    gap: 20px;
+
+    .avatar-user {
+      width: 40px;
+      height: 40px;
+      object-fit: cover;
+      border-radius: 50%;
+    }
+
+    .userName {
+      width: fit-content;
+      font-size: 15px;
+      font-weight: 500;
+      margin-bottom: 0;
+      margin-right: 20px;
+    }
+
+    .commentElement {
+      display: -webkit-box;
+      height: fit-content;
+      margin: 0;
+      font-size: 18px;
+    }
+    .ellipsisText {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+    }
+    .tag-person {
+      font-size: 16px;
+      margin-bottom: 0;
+      color: #011f4b;
+      font-weight: 600;
+      width: max-content;
+    }
+  }
+
+
+  .replay-section {
+    margin-left: 60px;
+
+    .comment-menu {
+      display: flex;
+      gap: 20px;
+      .buttons-menu{
+        font-size: 16px;
+        font-weight: 600;
+        margin-bottom: 0;
+        cursor: pointer;
+      }
+    }
+    .replays-wrapper {
+      display: flex;
+      flex-direction: column;
+      margin-top: 15px;
+      gap: 10px;
+    }
+
+  }
+}

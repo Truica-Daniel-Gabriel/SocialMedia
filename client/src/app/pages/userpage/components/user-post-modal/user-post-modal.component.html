@@ -1,0 +1,44 @@
+<div class="container">
+  <img [src]="post.imageUrl" alt="" class="image-post-modal" />
+  <div class="post-informations">
+    <section class="account-information">
+      <img [src]="AccountInfo?.profilePicture || 'assets/images/avatar.png'" alt="" class="user-avatar" />
+      <div class="user-location">
+        <h2 class="userName">{{ AccountInfo?.firstName }} {{ AccountInfo?.lastName }}</h2>
+        <p class="location">{{ post.location }}</p>
+      </div>
+    </section>
+
+    <section class="comments-section">
+      <div *ngIf="comments.length > 0; else elseBlock" class="commentsList">
+        <app-comment *ngFor="let comment of comments" [comment]="comment" (replay)="setReplay($event)"></app-comment>
+      </div>
+
+      <ng-template #elseBlock>
+        <p class="noComments">There is no comments</p>
+      </ng-template>
+    </section>
+
+    <section class="menu">
+      <div class="rating-icons">
+        <p class="likes">
+          <mat-icon matSuffix [ngClass]="likePost ? 'like-icon' : 'icons'" (click)="onSetLike()">favorite_plus</mat-icon>
+          <span>{{post.likes.length}}</span>
+        </p>
+        <mat-icon matSuffix class="icons">maps_ugc</mat-icon>
+      </div>
+
+      <mat-icon matSuffix class="icons">bookmark</mat-icon>
+    </section>
+
+    <section class="create-comment">
+      <fieldset class="wrapper-input">
+        <p class="userReplay" *ngIf="onSetReplay()">{{ replayUser?.tag }}</p>
+        <input type="text" [(ngModel)]="createComment" class="input-comment" id="comment" />
+        <label for="comment" class="label-input">Leave a comment</label>
+      </fieldset>
+
+      <button type="button" mat-raised-button class="black-button sendButton" (click)="onSendCommnent()">Send</button>
+    </section>
+  </div>
+</div>

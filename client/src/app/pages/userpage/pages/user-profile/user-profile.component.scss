@@ -1,14 +1,28 @@
 .container-wrapper {
   width: 100%;
   min-height: calc(100vh - 80px);
-  background-color: grey;
+  background-color: rgb(250, 250, 250);
   display: flex;
   flex-direction: column;
   align-items: center;
 
+  .info-text {
+    font-weight: 500;
+    font-size: 35px;
+    margin: auto 0;
+  }
+
+  .posts-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    width: 80%;
+    height: 100%;
+    gap: 30px 20px;
+    padding-top: 35px;
+  }
+
   .profile-credentials {
     width: 100%;
-    background-color: #ffff;
     padding: 35px 0;
     display: flex;
     justify-content: center;

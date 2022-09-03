@@ -1,11 +1,27 @@
 .container {
   display: flex;
-  height: 700px;
+  min-width: 300px;
   flex-direction: column;
-  border: 4px solid gray;
+  border: 1px solid gray;
   border-radius: 15px 15px 0 0;
   background-color: aliceblue;
   overflow: hidden;
+
+  .post-description {
+    font-size: 13px;
+    margin: 6px;
+    line-height: 1;
+    font-weight: 500;
+    cursor: pointer;
+  }
+
+  .small-description {
+    display: -webkit-box;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+  }
 
   .user-profile {
     display: flex;
@@ -51,6 +67,7 @@
     height: 64px;
     width: 100%;
     padding: 0 20px;
+    margin-top: auto;
 
     .rating-icons {
       display: flex;
@@ -64,6 +81,13 @@
     height: 30px;
     color: rgb(132, 132, 132);
     opacity: 0.5;
+    cursor: pointer;
+  }
+  .like-icon {
+    font-size: 30px;
+    width: 30px;
+    height: 30px;
+    color: rgb(201, 35, 35);
     cursor: pointer;
   }
 }
