@@ -22,11 +22,6 @@
       "es2020",
       "dom"
     ],
-    "paths" : {
-      "crypto": ["./node_modules/crypto-browserify"],
-      "stream": ["./node_modules/stream-browserify"],
-    }
-
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,

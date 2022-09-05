@@ -27,6 +27,45 @@ router.patch("/editAccountImage/:id", async (req, res) => {
   }
 });
 
+router.put("/editAccount/:id", async (req, res) => {
+  const { firstName, lastName, email, birthday, city } = req.body;
+
+  try {
+    const user = await User.findById(req.params.id);
+    if (!user) {
+      return res.status(404).json({
+        message: "User not found",
+      });
+    }
+
+    if (birthday) {
+      await user.updateOne({
+        firstName,
+        lastName,
+        email,
+        birthday,
+        city,
+      });
+    } else {
+      await user.updateOne({
+        firstName,
+        lastName,
+        email,
+        city,
+      });
+    }
+    const newUser = await User.findById(req.params.id)
+    res.status(200).json({
+      message: "User updated successfully",
+      account: newUser
+    })
+  } catch (error) {
+    res.status(500).json({
+      message: "Internal server error, contact us",
+    });
+  }
+});
+
 router.get("/profilePost/:id", async (req, res) => {
   try {
     const user = await User.findById(req.params.id);
@@ -92,12 +131,10 @@ router.patch("/follow", async (req, res) => {
         }
       );
 
-      return res
-        .status(201)
-        .json({
-          message: `You are now following ${friend.firstName}`,
-          follow: true,
-        });
+      return res.status(201).json({
+        message: `You are now following ${friend.firstName}`,
+        follow: true,
+      });
     } else {
       await user.updateOne(
         { $pull: { follow_ups: friendId } },
@@ -113,12 +150,10 @@ router.patch("/follow", async (req, res) => {
         }
       );
 
-      return res
-        .status(200)
-        .json({
-          message: `You are no longer following ${friend.firstName}`,
-          follow: false,
-        });
+      return res.status(200).json({
+        message: `You are no longer following ${friend.firstName}`,
+        follow: false,
+      });
     }
   } catch (error) {
     res.status(500).json({
@@ -132,15 +167,15 @@ router.post("/getSepcificUsers", async (req, res) => {
     const users = await User.find({
       _id: { $in: req.body.users },
     });
-    if(!users){
-     return  res.status(404).json({
-        message: "Users not found"
-      })
+    if (!users) {
+      return res.status(404).json({
+        message: "Users not found",
+      });
     }
     res.status(200).json({
-      message:"Succesfuly",
-      users
-    })
+      message: "Succesfuly",
+      users,
+    });
   } catch (error) {
     console.log(error);
     res.status(500).json({

@@ -12,15 +12,15 @@ export interface Account {
   isAdmin: boolean;
 }
 
-export interface RequestAccountLogin {
-  email: string;
-  password: string;
-}
-
 export interface ResponseAccountLogin {
   message: string;
   account: Account;
   jwtToken: string;
+}
+
+export interface RequestAccountLogin {
+  email: string;
+  password: string;
 }
 
 export interface RequestAccountRegister {

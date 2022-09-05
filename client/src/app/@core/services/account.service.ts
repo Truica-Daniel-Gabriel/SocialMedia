@@ -1,5 +1,6 @@
 import { HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { HttpService } from '../api/http.service';
@@ -26,7 +27,8 @@ export class AccountSerivce {
   constructor(
     private readonly http: HttpService,
     private readonly sessionService: SessionStorageService,
-    private readonly router: Router
+    private readonly router: Router,
+    private readonly seackBar: MatSnackBar
   ) {}
 
   public login(account: RequestAccountLogin): Observable<ResponseAccountLogin> {
@@ -70,6 +72,7 @@ export class AccountSerivce {
       })
     );
   }
+
   public setFollow(friendId: string | null): Observable<any> | void {
     if (friendId) {
       let queryParams = new HttpParams();
@@ -83,6 +86,24 @@ export class AccountSerivce {
         })
       );
     }
+  }
+
+  public editAccount(userDetails:Account):Observable<ResponseAccountUpdate> {
+    return this.http.put(`/user/editAccount/${this.account$.value?._id}`, userDetails).pipe(
+      tap({
+        next: ({message, account})=>{
+          this.seackBar.open(message, '', {
+            duration: 5000
+          })
+          this.account$.next(account);
+          this.sessionService.set({ key: 'account', value: JSON.stringify(account) });
+          this.router.navigate([`/userpage/profile/${account._id}`])
+        },
+        error: ({message})=>{
+
+        }
+      })
+      )
   }
 
   public getUserAccount(id: string | null | undefined): Observable<ResponseGetOtherUser> | void {

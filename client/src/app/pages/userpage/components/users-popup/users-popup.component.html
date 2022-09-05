@@ -1,5 +1,5 @@
 <div class="container">
-  <section class="users-wrapper" *ngFor="let user of users" >
+  <section class="users-wrapper" *ngFor="let user of users" (click)="onRedirectToUser(user)">
       <img [src]="user.profilePicture || 'assets/images/avatar.png'" alt="" class="img-wrapper">
       <p class="user-name">{{user.firstName}} {{user.lastName}}</p>
   </section>

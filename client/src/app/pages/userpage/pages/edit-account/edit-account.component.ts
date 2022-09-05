@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Account } from 'src/app/@core/models/account';
 import { AccountSerivce } from 'src/app/@core/services/account.service';
 
@@ -7,11 +8,21 @@ import { AccountSerivce } from 'src/app/@core/services/account.service';
   templateUrl: './edit-account.component.html',
   styleUrls: ['./edit-account.component.scss']
 })
-export class EditAccountComponent implements OnInit {
+export class EditAccountComponent {
   public accountSettings!:Account | null;
-  constructor(private readonly acccountService: AccountSerivce) { }
+  public editAccountForm: FormGroup = this.fb.group({
+    firstName:[this.acccountService.getAccount.value?.firstName, [Validators.required]],
+    lastName:[this.acccountService.getAccount.value?.lastName, [Validators.required]],
+    email:[this.acccountService.getAccount.value?.email, [Validators.required, Validators.email]],
+    birthday:[''],
+    city:[this.acccountService.getAccount.value?.city, [Validators.required]],
+  })
+  constructor(private readonly acccountService: AccountSerivce, private readonly fb: FormBuilder) { }
 
-  ngOnInit(): void {
-    this.accountSettings= this.acccountService.getAccount.value
+
+  public onEditAccount():void {
+    if(this.editAccountForm.valid){
+      this.acccountService.editAccount(this.editAccountForm.value).subscribe()
+    }
   }
 }
