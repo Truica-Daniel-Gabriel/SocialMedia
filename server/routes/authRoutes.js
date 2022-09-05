@@ -24,10 +24,6 @@ router.post("/login", async (req, res) => {
           firstName: user.firstName,
           lastName: user.lastName,
           id: user._id,
-          city: user.city,
-          birthday: user.age,
-          profilePicture: user.profilePicture,
-          friends: user.friends,
           isAdmin: user.isAdmin,
         },
         jwtSecret

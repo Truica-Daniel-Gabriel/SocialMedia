@@ -13,8 +13,8 @@ const port = process.env.PORT || 5000;
 //middleware
 app.use(express.json({limit:'4mb'}));
 app.use("/api/auth", authRoutes);
-app.use("/api/user", userRoutes);
-app.use("/api/post", postRoutes);
+app.use("/api/user", verifyUser, userRoutes);
+app.use("/api/post", verifyUser, postRoutes);
 
 //db connecting
 mongoose.connect(process.env.DATABACE_ACCESS, () =>

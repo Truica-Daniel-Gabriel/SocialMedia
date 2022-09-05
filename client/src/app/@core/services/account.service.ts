@@ -78,40 +78,39 @@ export class AccountSerivce {
       let queryParams = new HttpParams();
       queryParams = queryParams.append('userId', this.account$.value!._id);
       queryParams = queryParams.append('friendId', friendId);
-      return this.http.patch(`/user/follow`, null, {
-        params: queryParams,
-      }).pipe(
-        tap(()=>{
-          this.getUserAccount(this.account$.value?._id)?.subscribe()
+      return this.http
+        .patch(`/user/follow`, null, {
+          params: queryParams,
         })
-      );
+        .pipe(
+          tap(() => {
+            this.getUserAccount(this.account$.value?._id)?.subscribe();
+          })
+        );
     }
   }
 
-  public editAccount(userDetails:Account):Observable<ResponseAccountUpdate> {
+  public editAccount(userDetails: Account): Observable<ResponseAccountUpdate> {
     return this.http.put(`/user/editAccount/${this.account$.value?._id}`, userDetails).pipe(
       tap({
-        next: ({message, account})=>{
+        next: ({ message, account }) => {
           this.seackBar.open(message, '', {
-            duration: 5000
-          })
+            duration: 5000,
+          });
           this.account$.next(account);
           this.sessionService.set({ key: 'account', value: JSON.stringify(account) });
-          this.router.navigate([`/userpage/profile/${account._id}`])
+          this.router.navigate([`/userpage/profile/${account._id}`]);
         },
-        error: ({message})=>{
-
-        }
+        error: ({ message }) => {},
       })
-      )
+    );
   }
 
   public getUserAccount(id: string | null | undefined): Observable<ResponseGetOtherUser> | void {
-
-    if(id){
+    if (id) {
       return this.http.get(`/user/getUser/${id}`).pipe(
-        tap(({user})=>{
-          if(this.account$.value?._id === user._id){
+        tap(({ user }) => {
+          if (this.account$.value?._id === user._id) {
             this.account$.next(user);
             this.sessionService.set({ key: 'account', value: JSON.stringify(user) });
           }
@@ -120,12 +119,12 @@ export class AccountSerivce {
     }
   }
 
-  public getSpecificUsers(users:any):Observable<any> {
-    return this.http.post("/user/getSepcificUsers", {users})
+  public getSpecificUsers(users: any): Observable<any> {
+    return this.http.post('/user/getSepcificUsers', { users });
   }
 
   public getAllUsers(): Observable<ResponseGetAllUsers> | void {
-    if(this.account$.value?._id){
+    if (this.account$.value?._id) {
       return this.http.get(`/user/getAllUsers/${this.account$.value?._id}`);
     }
   }
@@ -136,5 +135,9 @@ export class AccountSerivce {
 
   public get getAccount(): BehaviorSubject<Account | null> {
     return this.account$;
+  }
+
+  public get getJwtToken(): string {
+    return this.jwtToken;
   }
 }
